@@ -32,7 +32,7 @@ const SingleTodo = ({ index, todo, todos, setTodos }: Props) => {
     )))
     setEdit(false);
   };
-
+  
   return (
     <Draggable draggableId={todo.id.toString()} index={index}>
       {(provided, snapshot) => (
@@ -53,8 +53,6 @@ const SingleTodo = ({ index, todo, todos, setTodos }: Props) => {
       )
     }
    
-   
-
     <div>
         <span className="icon" onClick={() =>{
           if (!edit && !todo.isDone) {

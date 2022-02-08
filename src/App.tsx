@@ -2,15 +2,19 @@ import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 
 import React, { useState } from 'react';
 import './App.css';
-import InputField from './components/InputField';
-import { Todo } from './components/module';
-import TodoList from './components/TodoList';
+import InputField from './component/InputField';
+import { Todo } from './component/module';
+import TodoList from './component/TodoList';
 
 
 const App: React.FC = () => {
+  const storedTodos = JSON.parse(localStorage.getItem("todosdata") || "");
+  const storedCompletedTodos = JSON.parse(localStorage.getItem("completedTodosData") || "");
+
+  
   const [todo, setTodo] = useState<string>("");
-  const [todos, setTodos] = useState<Todo[]>([]);
-  const [completedTodos, setCompletedTodos] = useState<Todo[]>([]);
+  const [todos, setTodos] = useState<Todo[]>(storedTodos);
+  const [completedTodos, setCompletedTodos] = useState<Todo[]>(storedCompletedTodos);
 
   const handleAdd = (e: React.FormEvent) => {
     e.preventDefault();
@@ -48,6 +52,7 @@ const App: React.FC = () => {
     setTodos(active);
   }
 
+  
   return (
     <DragDropContext onDragEnd={onDragEnd}>
     <div className='App'>

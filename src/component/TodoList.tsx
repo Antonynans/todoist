@@ -1,6 +1,6 @@
 import { Droppable } from 'react-beautiful-dnd';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Todo } from './module';
 import SingleTodo from './SingleTodo';
 import "./style.css";
@@ -13,6 +13,12 @@ interface Props {
 }
 
 const TodoList = ({ todos, setTodos, completedTodos, setCompletedTodos }: Props) => {
+
+  useEffect(() => {
+    localStorage.setItem("todosdata", JSON.stringify(todos));
+    localStorage.setItem("completedTodosData", JSON.stringify(completedTodos));
+  }, [todos, completedTodos]);
+
   return (
  
   <div className="container">
@@ -31,6 +37,7 @@ const TodoList = ({ todos, setTodos, completedTodos, setCompletedTodos }: Props)
     </div>
       )}
         </Droppable>
+        
         <Droppable droppableId='TodosRemove '>
         {(provided, snapshot) => (
           <div className={`todos remove ${snapshot.isDraggingOver ? "dragcomplete" : ""}`} ref={provided.innerRef} {...provided.droppableProps}>
